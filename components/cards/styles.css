@@ -1,0 +1,29 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.grid-item {
+  /* Optional: Define item styles */
+}
+
+.gradient-text {
+  background: linear-gradient(
+    to right,
+    #ff00cc,
+    #3333ff
+  ); /* Adjust colors as needed */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.recipePage ul li [aria-current="page"],
+.recipePage ul li [aria-current="page"]:hover {
+  background-color: white;
+}
+.recipePage ul li a,
+.recipePage ul li a:hover {
+  background-color: #8673ff;
+  cursor: pointer;
+}

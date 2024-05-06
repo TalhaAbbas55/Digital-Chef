@@ -1,0 +1,9 @@
+.ingredient_search {
+  width: 90%;
+  display: inline-block;
+}
+
+.ingredient_search > div {
+  background-color: black;
+  color: white;
+}

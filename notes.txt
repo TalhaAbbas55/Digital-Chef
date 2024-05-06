@@ -1,0 +1,10 @@
+there is something called route groups in next js in which we write the name ofhte foler in paranthesis so it will not be inlcuded in the url
+it is use lie lthis 
+(components) => About.js
+
+
+
+DoQktZexNJwEaq7Y
+
+
+    talhaabbas556989
