@@ -10,7 +10,9 @@ import React from "react";
 
 const page = async ({ params }: { params: { id: string } }) => {
   const userData = await currentUser();
-  if (!userData) redirect("/login");
+  console.log(userData, "daadata 1");
+
+  if (!userData) redirect("/sign-in");
 
   const userInfo = await fetchUser(params.id);
 

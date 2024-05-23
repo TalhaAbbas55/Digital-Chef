@@ -207,7 +207,7 @@ export async function toggleFromFavorites(userId: string, uri: number) {
     }
 
     // Update the favorites array based on the presence or absence of the URI
-    const operation = user.favorites.includes(uri) ? "$pull" : "$push";
+    const operation = user.favorites?.includes(uri) ? "$pull" : "$push";
 
     // Update the favorites array using $pull or $push
     await User.updateOne({ _id: userId }, { [operation]: { favorites: uri } });

@@ -21,7 +21,8 @@ export const metadata: Metadata = {
 
 export default async function MusicPage() {
   const userData = await currentUser();
-  if (!userData) redirect("/login");
+  console.log(userData, "data 1");
+  if (!userData) redirect("/sign-in");
   const userInfo = await fetchUser(userData.id);
   const response = await getRequestRecipe(
     `${process.env.NEXT_PUBLIC_SPOONACULAR_URL}/recipes/random?limitLicense=true&number=10&apiKey=${process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY}`
