@@ -27,3 +27,7 @@
   background-color: #8673ff;
   cursor: pointer;
 }
+
+.dangerButton {
+  background-color: red !important;
+}

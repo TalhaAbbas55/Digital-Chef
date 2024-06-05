@@ -24,7 +24,6 @@ async function Page({ searchParams }: { searchParams: SearchParams }) {
   let response;
 
   const Ingredients: string = decodeURIComponent(searchParams.q || "");
-  console.log(Ingredients, "Ingredients");
 
   if (Ingredients?.length > 0) {
     response = await getRequestRecipe(

@@ -21,7 +21,6 @@ async function Page({ searchParams }: { searchParams: SearchParams }) {
   let response;
 
   const dishName = decodeURIComponent(searchParams.q || "");
-  console.log(dishName, "here");
 
   if (dishName?.length > 0) {
     const url = `${process.env.NEXT_PUBLIC_SPOONACULAR_URL}/recipes/complexSearch?query=${dishName}&limitLicense=true&number=2&apiKey=${process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY}`;

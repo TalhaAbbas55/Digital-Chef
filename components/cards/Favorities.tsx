@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import RecipeHomeCard from "./RecipeHomeCard";
 import { getRequestRecipe } from "@/lib/actions/recipes.action";
-import { fetchUser } from "@/lib/actions/user.actions";
+import { fetchUser, fetchUserSingle } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
 import { Loader } from "lucide-react";
 
@@ -16,7 +16,8 @@ const Favorities = ({ userId }) => {
   }, []);
 
   const checkUser = async () => {
-    const tempInfo = await fetchUser(userId);
+    console.log(" i am ehre");
+    const tempInfo = await fetchUserSingle(userId);
     setUserInfo(tempInfo);
 
     if (!tempInfo?.onboarded) redirect("/onboarding");

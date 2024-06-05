@@ -47,7 +47,7 @@ export const POST = async (request: Request) => {
   // Activitate Webhook in the Clerk Dashboard.
   // After adding the endpoint, you'll see the secret on the right side.
   const wh = new Webhook(process.env.NEXT_CLERK_WEBHOOK_SECRET || "");
-  console.log(process.env.NEXT_CLERK_WEBHOOK_SECRET,'her');
+  console.log(process.env.NEXT_CLERK_WEBHOOK_SECRET, "her");
 
   let evnt: Event | null = null;
 
@@ -64,7 +64,7 @@ export const POST = async (request: Request) => {
 
   // Listen organization creation event
   if (eventType === "organization.created") {
-    console.log('creating againfj sklfjsklfjskldfjs');
+    console.log("creating againfj sklfjsklfjskldfjs");
     // Resource: https://clerk.com/docs/reference/backend-api/tag/Organizations#operation/CreateOrganization
     // Show what evnt?.data sends from above resource
     const { id, name, slug, logo_url, image_url, created_by } =
@@ -81,6 +81,7 @@ export const POST = async (request: Request) => {
         "org bio",
         created_by
       );
+      console.log("create community");
 
       return NextResponse.json({ message: "User created" }, { status: 201 });
     } catch (err) {

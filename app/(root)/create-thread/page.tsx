@@ -14,7 +14,6 @@ interface Props {
 const page = async ({ searchParams }: Props) => {
   const { repost, content, author, community } = searchParams;
   const userData = await currentUser();
-  console.log(userData, "datasss 1");
 
   if (!userData) redirect("/sign-in");
 

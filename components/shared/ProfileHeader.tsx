@@ -1,5 +1,9 @@
+"use client";
 import Image from "next/image";
 import React from "react";
+import { Button } from "../ui/button";
+import { setUserOnboardedToFalse } from "@/lib/actions/user.actions";
+import { useRouter } from "next/navigation";
 interface Props {
   accountId: string;
   authUserId: string;
@@ -18,6 +22,13 @@ const ProfileHeader = ({
   bio,
   type,
 }: Props) => {
+  const router = useRouter();
+  const handleEdit = async () => {
+    console.log("Edit");
+    const res = await setUserOnboardedToFalse({ userId: authUserId });
+    router.push("/onboarding");
+    console.log(res);
+  };
   return (
     <div className="flex w-full flex-col justify-start">
       <div className="flex items-center justify-between">
@@ -35,8 +46,10 @@ const ProfileHeader = ({
             <p className="text-base-medium text-gray-1">@{username}</p>
           </div>
         </div>
+        <Button className="user-card_btn" onClick={handleEdit}>
+          Edit
+        </Button>
       </div>
-      {/* {TODO: community} */}
       <p className="mt-6 max-w-lg text-base regular text-light-2">{bio}</p>
       <div className="mt-12 h-0 5 w-full bg-dark-3" />
     </div>

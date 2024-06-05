@@ -21,7 +21,6 @@ export const metadata: Metadata = {
 
 export default async function MusicPage() {
   const userData = await currentUser();
-  console.log(userData, "data 1");
   if (!userData) redirect("/sign-in");
   const userInfo = await fetchUser(userData.id);
   const response = await getRequestRecipe(

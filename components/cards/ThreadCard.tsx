@@ -167,7 +167,7 @@ async function ThreadCard({
                   </Tooltip>
                 </TooltipProvider>
 
-                {author.id !== currentUserId && (
+                {/* {author.id !== currentUserId && (
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger>
@@ -188,7 +188,7 @@ async function ThreadCard({
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
-                )}
+                )} */}
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger>

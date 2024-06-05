@@ -222,3 +222,22 @@ export async function toggleFromFavorites(userId: string, uri: number) {
     throw new Error("Unable to toggle favorites");
   }
 }
+
+interface ParamsTemp {
+  userId: string;
+}
+
+export async function setUserOnboardedToFalse({
+  userId,
+}: ParamsTemp): Promise<void> {
+  try {
+    // Connect to the database
+    await connectToDatabase();
+
+    // Find the user by ID and update the onboarded field to false
+    await User.findOneAndUpdate({ id: userId }, { onboarded: false });
+    return { success: true };
+  } catch (error: any) {
+    throw new Error(`Failed to update onboarded status: ${error.message}`);
+  }
+}

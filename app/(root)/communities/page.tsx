@@ -47,6 +47,8 @@ async function Page({
                 imgUrl={community.image}
                 bio={community.bio}
                 members={community.members}
+                userId={userInfo._id}
+                requests={community.requests}
               />
             ))}
           </>

@@ -166,8 +166,10 @@ function PostThread({
         ? `${values.thread}
       
       
-      ---(original post by ${author} in ${
-            community ? +community + "Community" : ""
+      ---(original post by ${author} ${
+            community && community !== "undefined"
+              ? "in" + community + "Community"
+              : ""
           })     
       `
         : values.thread,
@@ -177,7 +179,7 @@ function PostThread({
       files: selectedImages.forValue,
     });
 
-    router.push("/");
+    router.push("/others");
   };
 
   //handle and convert it in base 64
@@ -207,6 +209,7 @@ function PostThread({
       description: "Image deleted",
     });
   };
+  console.log(community, "community");
   return (
     <Form {...form}>
       <form
@@ -301,11 +304,11 @@ function PostThread({
         {repost && (
           <p className="text-light-1">
             Original by {author}{" "}
-            {community && (
+            {community && community !== "undefined" ? (
               <span>
                 in <b>{community} Community</b>
               </span>
-            )}
+            ) : null}
           </p>
         )}
 

@@ -1,4 +1,5 @@
 import { fetchUser, getActivity } from "@/lib/actions/user.actions";
+import { formatDateString } from "@/lib/utils";
 import { currentUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,7 +7,6 @@ import { redirect } from "next/navigation";
 
 const page = async () => {
   const userData = await currentUser();
-  console.log(userData, "data s1");
 
   if (!userData) redirect("/sign-in");
 
@@ -17,6 +17,7 @@ const page = async () => {
   const activity = await getActivity(userInfo._id);
 
   if (!userInfo?.onboarded) redirect("/onboarding");
+
   return (
     <section>
       <h1 className="head-text mb-10">Activity</h1>
@@ -25,19 +26,27 @@ const page = async () => {
           <>
             {activity.map((activity) => (
               <Link key={activity.id} href={`/thread/${activity.parentId}`}>
-                <article className="activity-card cursor-pointer">
-                  <Image
-                    src={activity.author.image}
-                    alt={activity.author.name}
-                    width={20}
-                    height={20}
-                    className="rounded-full object-cover"
-                  />
-                  <p className="!text-small-regular text-light-1">
-                    <span className="mr-1 text-primary-500">
-                      {activity.author.name}
-                    </span>{" "}
-                    replied to you
+                <article className="activity-card cursor-pointer flex justify-between">
+                  <div
+                    className="flex "
+                    style={{ alignItems: "center", gap: 4 }}
+                  >
+                    <Image
+                      src={activity.author.image}
+                      alt={activity.author.name}
+                      width={20}
+                      height={20}
+                      className="rounded-full object-cover"
+                    />
+                    <p className="!text-small-regular text-light-1">
+                      <span className="mr-1 text-primary-500">
+                        {activity.author.name}
+                      </span>{" "}
+                      replied to you
+                    </p>
+                  </div>
+                  <p style={{ color: "white" }}>
+                    {formatDateString(activity.createdAt)}
                   </p>
                 </article>
               </Link>

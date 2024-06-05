@@ -17,7 +17,7 @@ export async function createCommunity(
   createdById: string // Change the parameter name to reflect it's an id
 ) {
   try {
-    console.log(' creating a community');
+    console.log(" creating a community");
     connectToDatabase();
 
     // Find the user with the provided unique id
@@ -42,6 +42,8 @@ export async function createCommunity(
     user.communities.push(createdCommunity._id);
     await user.save();
 
+    console.log(createdCommunity, "com here");
+
     return createdCommunity;
   } catch (error) {
     // Handle any errors
@@ -58,6 +60,11 @@ export async function fetchCommunityDetails(id: string) {
       "createdBy",
       {
         path: "members",
+        model: User,
+        select: "name username image _id id",
+      },
+      {
+        path: "requests",
         model: User,
         select: "name username image _id id",
       },
@@ -162,7 +169,8 @@ export async function fetchCommunities({
 
 export async function addMemberToCommunity(
   communityId: string,
-  memberId: string
+  memberId: string,
+  short: boolean
 ) {
   try {
     connectToDatabase();
@@ -194,7 +202,11 @@ export async function addMemberToCommunity(
     user.communities.push(community._id);
     await user.save();
 
-    return community;
+    if (short) {
+      return { success: true };
+    } else {
+      return community;
+    }
   } catch (error) {
     // Handle any errors
     console.error("Error adding member to community:", error);
@@ -300,6 +312,93 @@ export async function deleteCommunity(communityId: string) {
     return deletedCommunity;
   } catch (error) {
     console.error("Error deleting community: ", error);
+    throw error;
+  }
+}
+
+export async function requestToJoin({
+  communityId,
+  userId,
+}: {
+  communityId: string;
+  userId: string;
+}) {
+  try {
+    connectToDatabase();
+
+    // Find the community by its unique id
+    const community = await Community.findOne({ id: communityId });
+
+    if (!community) {
+      throw new Error("Community not found");
+    }
+
+    // Find the user by their unique id
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    // Check if the user has already sent a request to join the community
+    if (community?.requests?.includes(user._id)) {
+      console.log(community, "com");
+      throw new Error("User has already requested to join the community");
+    }
+
+    // Add the user's _id to the requests array in the community
+    community.requests.push(user._id);
+    await community.save();
+
+    return { status: 200, message: "Request has been sent" };
+  } catch (error) {
+    // Handle any errors
+    console.error("Error joining community:", error);
+    throw error;
+  }
+}
+
+export async function cancelRequestToJoin({
+  communityId,
+  userId,
+}: {
+  communityId: string;
+  userId: string;
+}) {
+  try {
+    connectToDatabase();
+
+    // Find the community by its unique id
+    const community = await Community.findOne({ _id: communityId });
+    console.log(community, "com here");
+
+    if (!community) {
+      throw new Error("Community not found");
+    }
+
+    // Find the user by their unique id
+    const user = await User.findOne({ id: userId });
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    // Check if the user has not sent a request to join the community
+    if (!community?.requests?.includes(user._id)) {
+      console.log(community, "com");
+      throw new Error("User has not requested to join the community");
+    }
+
+    // Remove the user's _id from the requests array in the community
+    community.requests = community.requests.filter(
+      (id) => id.toString() !== user._id.toString()
+    );
+    await community.save();
+
+    return { status: 200, message: "Request Canceled" };
+  } catch (error) {
+    // Handle any errors
+    console.error("Error removing join request:", error);
     throw error;
   }
 }

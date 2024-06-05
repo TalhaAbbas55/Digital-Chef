@@ -95,6 +95,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
   return (
     <Form {...form}>
       <form
+        style={{ minWidth: "50vw" }}
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8 flex flex-col justify-start gap-10"
       >
@@ -103,7 +104,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
           name="profile_photo"
           render={({ field }) => {
             return (
-              <FormItem className="flex items-center gap-4">
+              <FormItem className="flex items-center gap-4 justify-center">
                 <FormLabel className="account-form_image-label">
                   {field.value ? (
                     <Image
@@ -124,7 +125,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                     />
                   )}
                 </FormLabel>
-                <FormControl className="flex-1 text-base-semibold text-gray-200">
+                {/* <FormControl className="flex-1 text-base-semibold text-gray-200">
                   <Input
                     type="file"
                     accept="image/*"
@@ -132,7 +133,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                     className="account-form_image-input"
                     onChange={(e) => handleImage(e, field.onChange)}
                   />
-                </FormControl>
+                </FormControl> */}
               </FormItem>
             );
           }}
