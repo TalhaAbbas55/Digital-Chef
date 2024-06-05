@@ -22,12 +22,12 @@ async function Page({ params }: { params: { id: string } }) {
   return (
     <section>
       <ProfileHeader
-        accountId={communityDetails.createdBy.id}
+        accountId={communityDetails?.createdBy?.id}
         authUserId={user?.id || ""}
-        name={communityDetails.name}
-        username={communityDetails.username}
-        imgUrl={communityDetails.image}
-        bio={communityDetails.bio}
+        name={communityDetails?.name}
+        username={communityDetails?.username}
+        imgUrl={communityDetails?.image}
+        bio={communityDetails?.bio}
         type="Community"
       />
 
@@ -48,7 +48,7 @@ async function Page({ params }: { params: { id: string } }) {
 
                   {tab.label === "Posts" && (
                     <p className="ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-light-2">
-                      {communityDetails.threads.length}
+                      {communityDetails?.threads?.length}
                     </p>
                   )}
                   {tab.label === "Requests" && (

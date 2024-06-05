@@ -26,6 +26,7 @@ export function formatDateString(dateString: string) {
   const time = date.toLocaleTimeString([], {
     hour: "numeric",
     minute: "2-digit",
+    timeZone: "Asia/Karachi",
   });
 
   return `${time} - ${formattedDate}`;
