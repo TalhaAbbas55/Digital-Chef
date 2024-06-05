@@ -27,7 +27,7 @@ async function Page({ searchParams }: { searchParams: SearchParams }) {
 
   if (Ingredients?.length > 0) {
     response = await getRequestRecipe(
-      `${process.env.NEXT_PUBLIC_SPOONACULAR_URL}${apiUrls.GET_BY_INGREDIENTS}${Ingredients}&limitLicense=true&number=2&apiKey=${process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY}`
+      `${process.env.NEXT_PUBLIC_SPOONACULAR_URL}${apiUrls.GET_BY_INGREDIENTS}${Ingredients}&limitLicense=true&number=10&apiKey=${process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY}`
     );
   }
 

@@ -23,7 +23,7 @@ async function Page({ searchParams }: { searchParams: SearchParams }) {
   const dishName = decodeURIComponent(searchParams.q || "");
 
   if (dishName?.length > 0) {
-    const url = `${process.env.NEXT_PUBLIC_SPOONACULAR_URL}/recipes/complexSearch?query=${dishName}&limitLicense=true&number=2&apiKey=${process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY}`;
+    const url = `${process.env.NEXT_PUBLIC_SPOONACULAR_URL}/recipes/complexSearch?query=${dishName}&limitLicense=true&number=10&apiKey=${process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY}`;
     response = await getRequestRecipe(url);
   }
 
